@@ -1,0 +1,10 @@
+import express from 'express';
+import cors from 'cors';
+import { env } from './env';
+
+const app = express();
+
+app.use(cors());
+app.use(express.json());
+
+app.listen(env.PORT, () => { console.log(`Server runnig on port ${env.PORT}`) });
