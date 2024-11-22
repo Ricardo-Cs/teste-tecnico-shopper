@@ -8,10 +8,24 @@ datasource db {
 }
 
 model ride {
-  id        String @id
-  name      String
-  car       String
-  rating    String
-  tax       Float
-  kilometer Int
+  id          Int      @id @default(autoincrement())
+  origin      String
+  date        DateTime
+  destination String
+  distance    Int
+  duration    String
+  value       Int
+  driver      driver   @relation(fields: [driver_id], references: [id])
+  driver_id   Int
+}
+
+model driver {
+  id              Int    @id @default(autoincrement())
+  name            String
+  description     String
+  car_model       String
+  rating          Int
+  fee_per_km      Int
+  min_distance_km Int
+  ride            ride[]
 }
