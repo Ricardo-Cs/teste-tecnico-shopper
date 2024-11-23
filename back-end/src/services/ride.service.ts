@@ -1,3 +1,5 @@
-// export class RideService {
-//     async create()
-// }
+export class RideService {
+    async rideEstimate(origin: string, destination: string) {
+
+    }
+}
