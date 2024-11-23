@@ -1,7 +1,5 @@
-import { Driver } from "./driver.types";
-
 export interface Ride {
-    id: number;
+    id?: number;
     origin: string;
     date: Date;
     destination: string;
