@@ -1,11 +1,19 @@
 import { Router } from "express";
-import { rideController } from "../controllers/rideController";
+import { RideController } from "../controllers/rideController";
 
 const router = Router();
-const RideController = new rideController();
+const rideController = new RideController();
 
 router.post('/estimate', (req, res) => {
-    RideController.rideEstimate(req, res);
+    rideController.rideEstimate(req, res);
+});
+
+router.patch('/confirm', (req, res) => {
+    rideController.rideConfirm(req, res);
+});
+
+router.get('/:customer_id', (req, res) => {
+    rideController.getUserRides(req, res);
 });
 
 export default router;
