@@ -5,6 +5,7 @@ export class RideRepository {
     async create(ride: Ride): Promise<Ride> {
         return prisma.ride.create({
             data: {
+                customers_id: 1,
                 origin: ride.origin,
                 date: ride.date,
                 destination: ride.destination,
