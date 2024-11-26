@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { rideEstimateRequest } from "../common/types/ride.types";
+import { rideConfirmRequest, rideEstimateRequest } from "../common/types/ride.types";
 import { RideService } from "../services/ride.service";
 
 export class RideController {
@@ -21,7 +21,27 @@ export class RideController {
     };
 
     async rideConfirm(req: Request, res: Response) {
-        res.json("Certo");
+        const data: rideConfirmRequest = {
+            customer_id: req.body.customer_id,
+            origin: req.body.origin,
+            destination: req.body.destination,
+            distance: req.body.distance,
+            duration: req.body.duration,
+            driver: {
+                id: req.body.driver.id,
+                name: req.body.driver.name
+            },
+            value: req.body.value
+        };
+
+        const result = await this.rideService.rideConfirm(data);
+        res.status(result.status).json(
+            {
+                error_code: result.error_code,
+                error_description: result.error_description,
+                success: result.success
+            }
+        );
     }
 
     async getUserRides(req: Request, res: Response) {

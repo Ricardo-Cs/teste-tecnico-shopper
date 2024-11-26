@@ -1,7 +1,7 @@
 import { rideEstimateResponse } from "./ride.types";
 
 export interface Driver {
-    id: number;
+    id: string;
     name: string;
     description: string;
     vehicle: string;

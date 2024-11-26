@@ -9,21 +9,21 @@ datasource db {
 }
 
 model ride {
-  id           Int       @id @default(autoincrement())
-  origin       String
-  date         DateTime  @default(now())
-  destination  String
-  distance     Int
-  duration     String
-  value        Int
-  driver       driver    @relation(fields: [driver_id], references: [id])
-  customer     customers @relation(fields: [customers_id], references: [id])
-  driver_id    Int
-  customers_id Int
+  id          Int       @id @default(autoincrement())
+  origin      String
+  date        DateTime  @default(now())
+  destination String
+  distance    Int
+  duration    String
+  value       Int
+  driver      driver?   @relation(fields: [driver_id], references: [id])
+  driver_id   String?
+  customer    customer? @relation(fields: [customer_id], references: [id])
+  customer_id String?
 }
 
 model driver {
-  id          Int    @id @default(autoincrement())
+  id          String @id
   name        String
   description String
   vehicle     String
@@ -34,8 +34,8 @@ model driver {
   ride        ride[]
 }
 
-model customers {
-  id    Int    @id @default(autoincrement())
+model customer {
+  id    String @id
   name  String
   email String
   ride  ride[]

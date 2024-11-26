@@ -1,12 +1,12 @@
 export interface Ride {
     id?: number;
     origin: string;
-    date: Date;
+    date?: Date;
     destination: string;
     distance: number;
     duration: string;
     value: number;
-    driver_id: number;
+    driver_id: string;
 }
 
 export interface rideEstimateRequest {
@@ -28,7 +28,7 @@ export interface rideEstimateResponse {
     duration: string;
     options:
     {
-        id: number,
+        id: string,
         name: string,
         description: string,
         vehicle: string,
@@ -39,4 +39,17 @@ export interface rideEstimateResponse {
         value: number
     }[] | null;
     routeResponse: object;
+};
+
+export interface rideConfirmRequest {
+    customer_id: string;
+    origin: string;
+    destination: string;
+    distance: number;
+    duration: string;
+    driver: {
+        id: string;
+        name: string;
+    },
+    value: number;
 }

@@ -5,11 +5,13 @@ export const prisma = new PrismaClient({});
 // Cria os dados de driver no banco diretamente, apenas para testar mais facilmente
 export async function main() {
     const existingDrivers = await prisma.driver.count();
+    const existingCustomers = await prisma.customer.count();
 
     if (existingDrivers === 0) {
         await prisma.driver.createMany({
             data: [
                 {
+                    id: "1",
                     name: "Homer Simpson",
                     description: "Relaxe e aproveite o passeio.",
                     vehicle: "Plymouth Valiant 1973",
@@ -19,6 +21,7 @@ export async function main() {
                     minKm: 1,
                 },
                 {
+                    id: "2",
                     name: "Dominic Toretto",
                     description: "Rapidez e segurança.",
                     vehicle: "Dodge Charger R/T 1970",
@@ -28,6 +31,7 @@ export async function main() {
                     minKm: 5,
                 },
                 {
+                    id: "3",
                     name: "James Bond",
                     description: "Classe e discrição.",
                     vehicle: "Aston Martin DB5",
@@ -38,5 +42,15 @@ export async function main() {
                 },
             ],
         });
+    }
+
+    if (existingCustomers === 0) {
+        await prisma.customer.create({
+            data: {
+                id: "1",
+                email: "user@gmail.com",
+                name: "User"
+            }
+        })
     }
 }
