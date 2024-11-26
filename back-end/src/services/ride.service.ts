@@ -1,8 +1,8 @@
 import { computeRoutes } from "../common/libs/maps";
 import { findDriverById, findDriverByMinKm } from "../repositories/driver.repository";
 import { Driver, mapDriversToOptions } from "../common/types/driver.types";
-import { rideConfirmRequest, rideEstimateRequest, rideEstimateResponse } from "../common/types/ride.types";
-import { insertRide } from "../repositories/ride.repository";
+import { Ride, rideConfirmRequest, rideEstimateRequest, rideEstimateResponse } from "../common/types/ride.types";
+import { getRidesByCustomerAndDriverId, getRidesByCustomerId, insertRide } from "../repositories/ride.repository";
 
 export class RideService {
     async rideEstimate(data: rideEstimateRequest) {
@@ -48,5 +48,21 @@ export class RideService {
 
         const insertedRide = await insertRide(data);
         return { status: 200, success: true };
+    }
+
+    async userRides(customer_id: string, driver_id?: string) {
+        let rides: any[] = [];
+        if (driver_id) {
+            rides = await getRidesByCustomerAndDriverId(customer_id, driver_id);
+        }
+        if (!driver_id) {
+            rides = await getRidesByCustomerId(customer_id);
+        }
+
+        if (!rides) {
+            return { status: 404, error_code: "NO_RIDES_FOUND", error_description: "Nenhum registro encontrado." }
+        }
+
+        return { status: 200, rides: rides }
     }
 }

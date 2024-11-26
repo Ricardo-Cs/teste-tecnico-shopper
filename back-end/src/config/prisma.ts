@@ -11,7 +11,6 @@ export async function main() {
         await prisma.driver.createMany({
             data: [
                 {
-                    id: "1",
                     name: "Homer Simpson",
                     description: "Relaxe e aproveite o passeio.",
                     vehicle: "Plymouth Valiant 1973",
@@ -21,7 +20,6 @@ export async function main() {
                     minKm: 1,
                 },
                 {
-                    id: "2",
                     name: "Dominic Toretto",
                     description: "Rapidez e segurança.",
                     vehicle: "Dodge Charger R/T 1970",
@@ -31,7 +29,6 @@ export async function main() {
                     minKm: 5,
                 },
                 {
-                    id: "3",
                     name: "James Bond",
                     description: "Classe e discrição.",
                     vehicle: "Aston Martin DB5",
@@ -47,7 +44,6 @@ export async function main() {
     if (existingCustomers === 0) {
         await prisma.customer.create({
             data: {
-                id: "1",
                 email: "user@gmail.com",
                 name: "User"
             }

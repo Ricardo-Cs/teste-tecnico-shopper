@@ -45,8 +45,17 @@ export class RideController {
     }
 
     async getUserRides(req: Request, res: Response) {
-        const customer_id = req.params.customer_id;
-        const driver_id = req.query.driver_id;
-        res.json({ customer_id, driver_id });
+        const customer_id: string = req.params.customer_id;
+        const driver_id: any = req.query.driver_id;
+
+        const result = await this.rideService.userRides(customer_id, driver_id);
+        res.status(result.status).json(
+            {
+                error_code: result.error_code,
+                error_description: result.error_description,
+                customer_id: customer_id,
+                rides: result.rides
+            }
+        )
     }
 }
