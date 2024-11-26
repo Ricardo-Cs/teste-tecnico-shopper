@@ -29,7 +29,7 @@ export interface rideEstimateResponse {
     duration: string;
     options:
     {
-        id: string,
+        id: number,
         name: string,
         description: string,
         vehicle: string,
@@ -49,7 +49,7 @@ export interface rideConfirmRequest {
     distance: number;
     duration: string;
     driver: {
-        id: string;
+        id: number;
         name: string;
     },
     value: number;

@@ -6,5 +6,5 @@ export const rideListValidator = [
         .isUUID().withMessage('O id do cliente deve ser um UUID válido.'),
     query('driver_id')
         .optional()
-        .isUUID().withMessage('O id do motorista deve ser um UUID válido.'),
+        .isString().withMessage('O id do motorista deve ser um UUID válido.'),
 ];

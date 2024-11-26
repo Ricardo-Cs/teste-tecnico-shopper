@@ -28,7 +28,7 @@ export class RideController {
             distance: req.body.distance,
             duration: req.body.duration,
             driver: {
-                id: req.body.driver.id,
+                id: Number(req.body.driver.id),
                 name: req.body.driver.name
             },
             value: req.body.value
@@ -48,7 +48,7 @@ export class RideController {
         const customer_id: string = req.params.customer_id;
         const driver_id: any = req.query.driver_id;
 
-        const result = await this.rideService.userRides(customer_id, driver_id);
+        const result = await this.rideService.userRides(customer_id, Number(driver_id));
         res.status(result.status).json(
             {
                 error_code: result.error_code,

@@ -15,7 +15,7 @@ export const insertRide = (ride: rideConfirmRequest) => {
     });
 };
 
-export const getRidesByCustomerAndDriverId = async (customer_id: string, driver_id: string) => {
+export const getRidesByCustomerAndDriverId = async (customer_id: string, driver_id: number) => {
     return prisma.ride.findMany({
         where: {
             customer_id,

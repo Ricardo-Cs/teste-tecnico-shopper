@@ -50,7 +50,7 @@ export class RideService {
         return { status: 200, success: true };
     }
 
-    async userRides(customer_id: string, driver_id?: string) {
+    async userRides(customer_id: string, driver_id?: number) {
         let rides: any[] = [];
         if (driver_id) {
             rides = await getRidesByCustomerAndDriverId(customer_id, driver_id);

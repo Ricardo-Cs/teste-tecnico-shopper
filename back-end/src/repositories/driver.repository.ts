@@ -9,7 +9,7 @@ export const findDriverByMinKm = async (distance: number): Promise<Driver[] | nu
     });
 }
 
-export const findDriverById = async (id: string): Promise<Driver | null> => {
+export const findDriverById = async (id: number): Promise<Driver | null> => {
     return prisma.driver.findUnique({
         where: {
             id
