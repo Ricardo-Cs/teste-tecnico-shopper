@@ -9,16 +9,15 @@ datasource db {
 }
 
 model ride {
-  id          Int       @id @default(autoincrement())
+  id          Int      @id @default(autoincrement())
   origin      String
-  date        DateTime  @default(now())
+  date        DateTime @default(now())
   destination String
   distance    Int
   duration    String
   value       Int
-  customer    customer? @relation(fields: [customer_id], references: [id])
-  customer_id String?
-  driver      driver?   @relation(fields: [driver_id], references: [id])
+  customer_id String
+  driver      driver?  @relation(fields: [driver_id], references: [id])
   driver_id   Int?
 }
 
@@ -32,11 +31,4 @@ model driver {
   ratePerKm   Float
   minKm       Int
   ride        ride[]
-}
-
-model customer {
-  id    String @id @default(uuid())
-  name  String
-  email String
-  ride  ride[]
 }

@@ -2,15 +2,19 @@ import { useState } from "react";
 import { getTripHistory } from "../services/api";
 
 const HistoryPage = () => {
-  const [filters, setFilters] = useState({ customer_id: "004bba97-d81f-45c8-baf4-7a33092aab5a", driver_id: "" });
-  const [trips, setTrips] = useState([]);
+  const [filters, setFilters] = useState({ customer_id: "", driver_id: "" });
+  const [rides, setRides] = useState([]);
   const [error, setError] = useState("");
 
   const handleFilter = async () => {
     try {
       setError("");
+      setRides([]);
       const data = await getTripHistory(filters.customer_id, filters.driver_id);
-      setTrips(data.rides);
+      if(data.rides.length == 0) {
+        setError("Sem viagens registradas!.");
+      }
+      setRides(data.rides);
     } catch (err) {
       setError("Erro ao buscar histórico. Tente novamente.");
     }
@@ -18,24 +22,40 @@ const HistoryPage = () => {
 
   return (
     <div>
-      <h1>Histórico de Viagens</h1>
-      {/* Formulário de filtro */}
-      <input type="text" placeholder="ID do usuário" />
-      <select>
+      <h2>Histórico de Viagens</h2>
+      <input
+        type="text"
+        placeholder="ID do usuário"
+        value={filters.customer_id}
+        onChange={(e) =>
+          setFilters((prev) => ({ ...prev, customer_id: e.target.value }))
+        }
+      />
+      <select
+        value={filters.driver_id}
+        onChange={(e) =>
+          setFilters((prev) => ({ ...prev, driver_id: e.target.value }))
+        }
+      >
         <option value="">Todos os motoristas</option>
-        {/* Opções de motoristas */}
+        <option value="1">Homer Simpson</option>
+        <option value="2">Dominic Toretto</option>
+        <option value="3">James Bond</option>
       </select>
-      <button onClick={handleFilter}>Aplicar Filtro</button>
-      {/* Exibir histórico */}
-      <div>
-        {trips.map((trip: any) => (
-          <div key={trip.id}>
-            <p>{trip.date}</p>
-            <p>{trip.driver.name}</p>
-            <p>{trip.origin}</p>
-            <p>{trip.destination}</p>
-            <p>{trip.value}</p>
-            {/* Outras informações */}
+      <button onClick={handleFilter} id="filterButton">Aplicar Filtro</button>
+      <div id="rideOptions">
+        {rides.map((ride: any) => (
+          <div key={ride.id}>
+            <p>Data: {new Date(ride.date).toLocaleDateString("pt-BR", {
+                day: "2-digit",
+                month: "2-digit",
+                year: "numeric",
+              })}       
+            </p>
+            <p>Motorista: {ride.driver.name}</p>
+            <p>Origem: {ride.origin}</p>
+            <p>Destino: {ride.destination}</p>
+            <p>Valor: R$ {ride.value.toFixed(2)}</p>
           </div>
         ))}
       </div>

@@ -20,7 +20,7 @@ export async function computeRoutes(origin: string, destination: string) {
             avoidHighways: false,
             avoidFerries: false
         },
-        languageCode: "en-US",
+        languageCode: "pt-BR",
         units: "IMPERIAL"
     };
 

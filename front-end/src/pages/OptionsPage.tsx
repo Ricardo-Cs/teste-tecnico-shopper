@@ -75,24 +75,21 @@ const OptionsPage = () => {
 
   return (
     <div>
-      <h1>Opções de Viagem</h1>
-      {/* Exibe o erro, se houver */}
+      <h2>Opções de Viagem</h2>
       {error && <p style={{ color: "red" }}>{error}</p>}
 
-      {/* Endereços */}
       <p><strong>Origem:</strong> {originAddress || "Carregando..."}</p>
       <p><strong>Destino:</strong> {destinationAddress || "Carregando..."}</p>
 
-      {/* Imagem do mapa, se estiver disponível */}
       {tripData.mapUrl && <img src={tripData.mapUrl} alt="Mapa da Rota" />}
       
-      <div>
+      <div id="rideOptions">
         {tripData.options.map((option: any) => (
-          <div key={option.id} style={{ border: "1px solid #ccc", margin: "10px", padding: "10px" }}>
-            <h2>{option.name}</h2>
+          <div key={option.id}>
+            <h3>{option.name}</h3>
             <p>Descrição: {option.description}</p>
             <p>Veículo: {option.vehicle}</p>
-            <p>Avaliação: {option.review.rating}</p>
+            <p>Avaliação: {option.review.rating}/5</p>
             <p>Valor: R$ {option.value.toFixed(2)}</p>
             <button onClick={() => handleChooseDriver(option.id)}>Escolher</button>
           </div>

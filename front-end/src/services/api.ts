@@ -9,4 +9,4 @@ export const confirmTrip = (data: any) =>
     axios.patch(`${API_URL}/ride/confirm`, data).then((res) => res.data);
 
 export const getTripHistory = (customer_id: string, driver_id?: string) =>
-    axios.get(`${API_URL}/ride/${customer_id}`, { params: driver_id }).then((res) => res.data);
+    axios.get(`${API_URL}/ride/${customer_id}?driver_id=${driver_id}`).then((res) => res.data);

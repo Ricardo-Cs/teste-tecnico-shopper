@@ -26,27 +26,39 @@ const SolicitationPage = () => {
     <div>
       <h2>Solicitação de Viagem</h2>
       <form>
-        <input
-          type="text"
-          name="customer_id"
-          placeholder="ID do usuário"
-          value={formData.customer_id}
-          onChange={handleChange}
-        />
-        <input
-          type="text"
-          name="origin"
-          placeholder="Origem"
-          value={formData.origin}
-          onChange={handleChange}
-        />
-        <input
-          type="text"
-          name="destination"
-          placeholder="Destino"
-          value={formData.destination}
-          onChange={handleChange}
-        />
+        <div>
+          <label htmlFor="customer_id">ID do usuário</label>
+          <input
+            id="customer_id"
+            type="text"
+            name="customer_id"
+            placeholder="ex.: 1"
+            value={formData.customer_id}
+            onChange={handleChange}
+          />
+        </div>
+        <div>
+          <label htmlFor="origin">Origem</label>
+          <input
+            id="origin"
+            type="text"
+            name="origin"
+            placeholder="ex.: Avenida Paulista, 1578, São Paulo, SP, Brasil"
+            value={formData.origin}
+            onChange={handleChange}
+          />
+        </div>
+        <div>
+          <label htmlFor="destination">Destino</label>
+          <input
+            id="destination"
+            type="text"
+            name="destination"
+            placeholder="ex.: Av. Atlântica, Copacabana, Rio de Janeiro, RJ, Brasil"
+            value={formData.destination}
+            onChange={handleChange}
+          />
+        </div>
         <button type="button" onClick={handleSubmit}>Estimar Viagem</button>
       </form>
       {error && <p>{error}</p>}
