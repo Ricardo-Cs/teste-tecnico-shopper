@@ -10,10 +10,10 @@ services:
       - ./back-end/prisma/dev.db:/app/prisma/dev.db
     environment:
       - GOOGLE_API_KEY=${GOOGLE_API_KEY}
-  # frontend:
-  #   build: 
-  #     context: ./front-end
-  #   ports:
-  #     - "80:80"
-  #   environment:
-  #     - GOOGLE_API_KEY=${GOOGLE_API_KEY}
+  frontend:
+    build: 
+      context: ./front-end
+    ports:
+      - "80:80"
+    environment:
+      - GOOGLE_API_KEY=${GOOGLE_API_KEY}
